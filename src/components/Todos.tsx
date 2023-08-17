@@ -1,9 +1,22 @@
-export default function Todos() {
+import { Todo } from '../models/todo';
+import TodoItem from './TodoItem';
+
+const Todos: React.FC<{
+    todos: Todo[];
+    onDeleteTodo: (id: number) => void;
+}> = props => {
     return (
-        <ul>
-            <li>Todo 1</li>
-            <li>Todo 2</li>
-            <li>Todo 3</li>
+        <ul className='p-4 flex flex-col gap-4'>
+            {props.todos.map((todo: Todo) => (
+                <TodoItem
+                    key={todo.id}
+                    id={todo.id}
+                    text={todo.text}
+                    deleteItem={props.onDeleteTodo}
+                />
+            ))}
         </ul>
     );
-}
+};
+
+export default Todos;
