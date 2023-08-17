@@ -1,15 +1,16 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
+import { TodoContext } from '../store/todo-context';
 
-const NewTodo: React.FC<{ addTodo: (todo: string) => void }> = props => {
+const NewTodo: React.FC = () => {
     const inputRef = useRef<HTMLInputElement>(null);
-
+    const { addTodo } = useContext(TodoContext);
     const submitHAndler: React.FormEventHandler<HTMLFormElement> = event => {
         event.preventDefault();
         const enteredText = inputRef.current!.value;
         // ? means if inputRef.current is null, it will return undefined.
         // ! means you're sure it won't be null
         if (enteredText.trim().length === 0) return;
-        props.addTodo(enteredText);
+        addTodo(enteredText);
     };
 
     return (
