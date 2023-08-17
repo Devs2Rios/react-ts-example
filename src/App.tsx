@@ -5,11 +5,10 @@ import NewTodo from './components/NewTodo';
 
 export default function App(): JSX.Element {
     const [todos, setTodos] = useState<Todo[]>([]);
+    const [currentTodo, setCurrentTodo] = useState<number>(0);
     const handleAddTodo: (todo: string) => void = todo => {
-        setTodos(prevTodos => [
-            ...prevTodos,
-            new Todo(prevTodos.length + 1, todo),
-        ]);
+        setTodos(prevTodos => [...prevTodos, new Todo(currentTodo, todo)]);
+        setCurrentTodo(prevCurrentTodo => prevCurrentTodo + 1);
     };
     const handleDeleteTodo: (id: number) => void = id => {
         setTodos(prevTodos => prevTodos.filter(todo => todo.id !== id));

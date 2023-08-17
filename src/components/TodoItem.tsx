@@ -5,7 +5,7 @@ const TodoItem: React.FC<{
 }> = props => {
     return (
         <li
-            onClick={() => props.deleteItem(props.id)}
+            onClick={props.deleteItem.bind(null, props.id)} // Binding will prevent the function to complain about the event argument passed from onClick
             className='p-2 bg-blue-100 text-blue-900 rounded cursor-pointer hover:bg-blue-900 hover:text-blue-100 transition-colors'
         >
             {props.text}
